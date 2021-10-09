@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 func twoSum(nums []int, target int) []int {
 	indexes := make([]int, 2)
 	counts := make(map[int][]int)
@@ -26,9 +24,4 @@ func twoSum(nums []int, target int) []int {
 	}
 
 	return indexes
-}
-
-func main() {
-	nums := []int{1, 4, 56, 2, 3, 4}
-	fmt.Println(twoSum(nums, 8))
 }
