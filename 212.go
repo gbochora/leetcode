@@ -3,18 +3,18 @@ package main
 func FindWords(board [][]byte, words []string) []string {
 
 	trie := buildTrie(words)
-	list := bfsFindWords(board, trie)
+	list := dfsFindWords(board, trie)
 
 	return list
 }
 
-func bfsFindWords(board [][]byte, trie *Trie) []string {
+func dfsFindWords(board [][]byte, trie *Trie) []string {
 	generatedWords := make(map[string]bool)
 	for x := range board {
 		for y := range board[0] {
 			visited := createVisitedGrid(len(board), len(board[0]))
 			visited[x][y] = true
-			bfsFromSpecificCell(board, x, y, string(board[x][y]), visited, trie, generatedWords)
+			dfsFromSpecificCell(board, x, y, string(board[x][y]), visited, trie, generatedWords)
 		}
 	}
 	list := make([]string, 0, len(generatedWords))
@@ -24,7 +24,7 @@ func bfsFindWords(board [][]byte, trie *Trie) []string {
 	return list
 }
 
-func bfsFromSpecificCell(board [][]byte, x, y int, prefix string, visited [][]bool, trie *Trie, generatedWords map[string]bool) {
+func dfsFromSpecificCell(board [][]byte, x, y int, prefix string, visited [][]bool, trie *Trie, generatedWords map[string]bool) {
 	if !trie.StartsWith(prefix) {
 		return
 	}
@@ -35,7 +35,7 @@ func bfsFromSpecificCell(board [][]byte, x, y int, prefix string, visited [][]bo
 		for dy := -1; dy <= 1; dy++ {
 			if isAdjacentCell(dx, dy) && isInBounds(board, x+dx, y+dy) && !visited[x+dx][y+dy] {
 				visited[x+dx][y+dy] = true
-				bfsFromSpecificCell(board, x+dx, y+dy, prefix+string(board[x+dx][y+dy]), visited, trie, generatedWords)
+				dfsFromSpecificCell(board, x+dx, y+dy, prefix+string(board[x+dx][y+dy]), visited, trie, generatedWords)
 				visited[x+dx][y+dy] = false
 			}
 		}
