@@ -14,7 +14,7 @@ func reverse(x int) int {
 		xAbsVal /= 10
 	}
 
-	return revVal
+	return sign * revVal
 }
 
 func SignInt(x int) int {
