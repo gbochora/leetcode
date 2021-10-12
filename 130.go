@@ -26,7 +26,7 @@ func findConnectedComponentBFS(board [][]byte, x, y int) {
 	q := NewQueue()
 	q.Enqueue(pointToNumber(board, x, y))
 	var connectedToBorder bool
-	for !q.isEmpty() {
+	for !q.IsEmpty() {
 		num, _ := q.Dequeue()
 		x, y = numberToPoint(board, num)
 		if visitedCells[num] {
@@ -82,7 +82,7 @@ func NewQueue() *Queue {
 }
 
 func (q *Queue) Dequeue() (int, error) {
-	if q.isEmpty() {
+	if q.IsEmpty() {
 		return 0, errors.New("Queue is empty")
 	}
 
@@ -105,6 +105,6 @@ func (q *Queue) Size() int {
 	return len(q.in) + len(q.out)
 }
 
-func (q *Queue) isEmpty() bool {
+func (q *Queue) IsEmpty() bool {
 	return q.Size() == 0
 }
