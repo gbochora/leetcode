@@ -2,7 +2,6 @@ package main
 
 import (
 	"container/list"
-	"fmt"
 )
 
 func ladderLength(beginWord string, endWord string, wordList []string) int {
@@ -18,7 +17,7 @@ func ladderLength(beginWord string, endWord string, wordList []string) int {
 	for queue.Len() > 0 {
 		elem := queue.Front()
 		queue.Remove(elem)
-		currentWord := fmt.Sprintf("%v", elem.Value)
+		currentWord := (*elem).Value.(string)
 		symbols := []byte(currentWord)
 		for i := range symbols {
 			for c := 'a'; c <= 'z'; c++ {
