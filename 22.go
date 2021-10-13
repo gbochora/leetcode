@@ -16,7 +16,7 @@ func generateParenthesisRec(balance, leftNum, rightNum, index int, comb []byte, 
 		return
 	}
 	comb[index] = '('
-	generateParenthesisRec(balance+1, leftNum+1, rightNum, index+1, comb, list)
+	generateParenthesisRec(balance+1, leftNum-1, rightNum, index+1, comb, list)
 	comb[index] = ')'
-	generateParenthesisRec(balance-1, leftNum, rightNum+1, index+1, comb, list)
+	generateParenthesisRec(balance-1, leftNum, rightNum-1, index+1, comb, list)
 }
