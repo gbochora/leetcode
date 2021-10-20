@@ -11,14 +11,18 @@ func maxNumber(nums1 []int, nums2 []int, k int) []int {
 	skipCount := len(nums1) + len(nums2) - k
 	nums1MaxValues = buildMaxValuesMap(nums1, skipCount)
 	nums2MaxValues = buildMaxValuesMap(nums2, skipCount)
-	maxNum := make([]int, k)
-	cache := make(map[string][]int)
+	maxNum := make([]byte, k)
+	cache := make(map[string][]byte)
 
 	maxNumberRec(nums1, nums2, 0, 0, skipCount, cache, &maxNum, 0)
-	return maxNum
+	res := make([]int, k)
+	for i := range maxNum {
+		res[i] = int(maxNum[i])
+	}
+	return res
 }
 
-func maxNumberRec(nums1, nums2 []int, pos1, pos2, skipCount int, cache map[string][]int, max *[]int, pos int) {
+func maxNumberRec(nums1, nums2 []int, pos1, pos2, skipCount int, cache map[string][]byte, max *[]byte, pos int) {
 	if pos == len(*max) {
 		return
 	}
@@ -34,15 +38,15 @@ func maxNumberRec(nums1, nums2 []int, pos1, pos2, skipCount int, cache map[strin
 	i2, d2 := nextDigit(key2, nums2, nums2MaxValues)
 
 	if d1 > d2 {
-		(*max)[pos] = d1
+		(*max)[pos] = byte(d1)
 		maxNumberRec(nums1, nums2, i1+1, pos2, skipCount-i1+pos1, cache, max, pos+1)
 	} else if d2 > d1 {
-		(*max)[pos] = d2
+		(*max)[pos] = byte(d2)
 		maxNumberRec(nums1, nums2, pos1, i2+1, skipCount-i2+pos2, cache, max, pos+1)
 	} else {
-		(*max)[pos] = d1
+		(*max)[pos] = byte(d1)
 		maxNumberRec(nums1, nums2, i1+1, pos2, skipCount-i1+pos1, cache, max, pos+1)
-		tmp := make([]int, len(*max)-pos)
+		tmp := make([]byte, len(*max)-pos)
 		copy(tmp, (*max)[pos:])
 		maxNumberRec(nums1, nums2, pos1, i2+1, skipCount-i2+pos2, cache, max, pos+1)
 
@@ -51,17 +55,19 @@ func maxNumberRec(nums1, nums2 []int, pos1, pos2, skipCount int, cache map[strin
 		} else {
 			copy(tmp, (*max)[pos:])
 		}
-		if len(cache) > 100000 {
+
+		//to avoid memory overflow. TODO map should be replaced on LRU Cache
+		if len(cache) > 300000 {
 			return
 		}
 		cache[buildKey(pos1, pos2, skipCount)] = tmp
 	}
 }
 
-func compareSlices(s1, s2 []int) int {
+func compareSlices(s1, s2 []byte) int {
 	for i := range s1 {
 		if s1[i] != s2[i] {
-			return s1[i] - s2[i]
+			return int(s1[i]) - int(s2[i])
 		}
 	}
 	return 0
