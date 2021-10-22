@@ -1,9 +1,13 @@
 package main
 
-import "math"
+import (
+	"math"
+
+	"github.com/gbochora/leetcode/utils"
+)
 
 func reverse(x int) int {
-	sign := SignInt(x)
+	sign := utils.SignInt(x)
 	xAbsVal := x * sign
 	var revVal int
 	for xAbsVal > 0 {
@@ -15,11 +19,4 @@ func reverse(x int) int {
 	}
 
 	return sign * revVal
-}
-
-func SignInt(x int) int {
-	if x < 0 {
-		return -1
-	}
-	return 1
 }
