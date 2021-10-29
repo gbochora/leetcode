@@ -1,4 +1,4 @@
-package tree
+package binarytrees
 
 func countHighestScoreNodes(parents []int) int {
 	tree := buildTreeSlice(parents)

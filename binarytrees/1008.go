@@ -1,4 +1,4 @@
-package tree
+package binarytrees
 
 func bstFromPreorder(preorder []int) *TreeNode {
 	var root *TreeNode
