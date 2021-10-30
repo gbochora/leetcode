@@ -35,7 +35,7 @@ func dfsFromSpecificCell(board [][]byte, x, y int, prefix string, visited [][]bo
 	}
 	for dx := -1; dx <= 1; dx++ {
 		for dy := -1; dy <= 1; dy++ {
-			if IsAdjacentCell(dx, dy) && IsInBounds(board, x+dx, y+dy) && !visited[x+dx][y+dy] {
+			if IsAdjacentCell(dx, dy) && IsInBounds(len(board), len(board[0]), x+dx, y+dy) && !visited[x+dx][y+dy] {
 				visited[x+dx][y+dy] = true
 				dfsFromSpecificCell(board, x+dx, y+dy, prefix+string(board[x+dx][y+dy]), visited, trie, generatedWords)
 				visited[x+dx][y+dy] = false
@@ -64,6 +64,6 @@ func IsAdjacentCell(dx, dy int) bool {
 	return dx != dy && dx*dy == 0
 }
 
-func IsInBounds(board [][]byte, x, y int) bool {
-	return x >= 0 && y >= 0 && x < len(board) && y < len(board[0])
+func IsInBounds(w, h, x, y int) bool {
+	return x >= 0 && y >= 0 && x < w && y < h
 }

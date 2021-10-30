@@ -26,11 +26,11 @@ func Solve(board [][]byte) {
 func findConnectedComponentBFS(board [][]byte, x, y int) {
 	visitedCells := make(map[int]bool)
 	q := NewQueue()
-	q.Enqueue(pointToNumber(board, x, y))
+	q.Enqueue(pointToNumber(len(board[0]), x, y))
 	var connectedToBorder bool
 	for !q.IsEmpty() {
 		num, _ := q.Dequeue()
-		x, y = numberToPoint(board, num)
+		x, y = numberToPoint(len(board[0]), num)
 		if visitedCells[num] {
 			continue
 		}
@@ -41,8 +41,8 @@ func findConnectedComponentBFS(board [][]byte, x, y int) {
 		}
 		for dx := -1; dx <= 1; dx++ {
 			for dy := -1; dy <= 1; dy++ {
-				if IsAdjacentCell(dx, dy) && IsInBounds(board, x+dx, y+dy) && board[x+dx][y+dy] == 'O' {
-					q.Enqueue(pointToNumber(board, x+dx, y+dy))
+				if IsAdjacentCell(dx, dy) && IsInBounds(len(board), len(board[0]), x+dx, y+dy) && board[x+dx][y+dy] == 'O' {
+					q.Enqueue(pointToNumber(len(board[0]), x+dx, y+dy))
 				}
 			}
 		}
@@ -54,17 +54,17 @@ func findConnectedComponentBFS(board [][]byte, x, y int) {
 
 func markAllVisitedCells(board [][]byte, visitedCells map[int]bool) {
 	for num := range visitedCells {
-		x, y := numberToPoint(board, num)
+		x, y := numberToPoint(len(board[0]), num)
 		board[x][y] = 'X'
 	}
 }
 
-func pointToNumber(board [][]byte, x, y int) int {
-	return x*len(board[0]) + y
+func pointToNumber(h, x, y int) int {
+	return x*h + y
 }
 
-func numberToPoint(board [][]byte, num int) (int, int) {
-	return num / len(board[0]), num % len(board[0])
+func numberToPoint(h, num int) (int, int) {
+	return num / h, num % h
 }
 
 func isBorderCell(board [][]byte, x, y int) bool {
