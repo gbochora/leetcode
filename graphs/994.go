@@ -3,9 +3,8 @@ package graphs
 import "container/list"
 
 const (
-	empty  int = 0
-	fresh      = 1
-	rotten     = 2
+	fresh  int = 1
+	rotten int = 2
 )
 
 func orangesRotting(grid [][]int) int {

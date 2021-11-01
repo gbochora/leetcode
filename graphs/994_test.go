@@ -1,6 +1,8 @@
 package graphs
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestOrangeRotting(t *testing.T) {
 	got := orangesRotting([][]int{{2, 2}, {1, 1}, {0, 0}, {2, 0}})
