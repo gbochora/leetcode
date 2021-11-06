@@ -18,7 +18,7 @@ func canFinish(numCourses int, prerequisites [][]int) bool {
 			if done[c] {
 				continue
 			}
-			if isCourseAllPrerequisitesFinished(prereqCourses[c], done) {
+			if isAllCoursesFinished(prereqCourses[c], done) {
 				queue.PushBack(c)
 			}
 		}
@@ -26,7 +26,7 @@ func canFinish(numCourses int, prerequisites [][]int) bool {
 	return len(done) == numCourses
 }
 
-func isCourseAllPrerequisitesFinished(prerequisites, done map[int]bool) bool {
+func isAllCoursesFinished(prerequisites, done map[int]bool) bool {
 	for c := range prerequisites {
 		if !done[c] {
 			return false
