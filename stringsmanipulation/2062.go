@@ -15,7 +15,7 @@ func countVowelSubstrings(word string) int {
 func isVowelSubstr(w string) bool {
 	vowels := make(map[rune]bool)
 	for _, c := range w {
-		if !isVowel(c) {
+		if !IsVowel(c) {
 			return false
 		}
 		vowels[c] = true
@@ -23,6 +23,6 @@ func isVowelSubstr(w string) bool {
 	return len(vowels) == 5
 }
 
-func isVowel(r rune) bool {
+func IsVowel(r rune) bool {
 	return r == 'a' || r == 'e' || r == 'i' || r == 'o' || r == 'u'
 }
