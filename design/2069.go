@@ -1,4 +1,4 @@
-package collections
+package design
 
 import "github.com/gbochora/leetcode/graphs"
 
@@ -16,7 +16,7 @@ type Robot struct {
 	x, y, dir, w, h int
 }
 
-func Constructor(width int, height int) Robot {
+func ConstructorRobot(width int, height int) Robot {
 	var r Robot
 	r.w = width
 	r.h = height
