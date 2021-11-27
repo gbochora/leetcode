@@ -1,4 +1,4 @@
-package main
+package implementation
 
 func validateStackSequences(pushed []int, popped []int) bool {
 	var pushIndex, popIndex int
@@ -19,8 +19,4 @@ func validateStackSequences(pushed []int, popped []int) bool {
 		}
 	}
 	return popIndex == len(popped)
-}
-
-func main() {
-	validateStackSequences([]int{1, 2, 3, 4, 5}, []int{4, 5, 3, 2, 1})
 }
